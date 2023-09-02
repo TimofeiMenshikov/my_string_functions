@@ -1,0 +1,10 @@
+char my_puts(const char* const str);
+char* my_strch(char* const str, const int ch);
+size_t my_strlen(const char* const str);
+char* my_strcpy(char*  dest, const char*  source);
+char* my_strncpy(char* dest, const char* source, size_t cp_number);
+char* my_strcat(char* dest, const char* append);
+char* my_strncat(char* dest, const char* append, size_t add_number);
+char* my_fgets(char* str, int number_of_chars, FILE* stream);
+void string_research(const char* const string);
+char* my_strdup(const char* str);
