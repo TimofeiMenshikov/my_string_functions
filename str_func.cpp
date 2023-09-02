@@ -2,6 +2,7 @@
 #include <malloc.h>
 #include <assert.h>
 
+
 char my_puts(const char* const str)
 {
 	size_t printed_number = 0;
@@ -154,9 +155,3 @@ char* my_strdup(const char* str)
 	return new_str;
 }
 
-int main()
-{
-	FILE* inputfile = fopen("input.txt", "r");
-	char str[] = "hello";
-	str = my_fgets(str, 10, inputfile);
-}
