@@ -155,3 +155,27 @@ char* my_strdup(const char* str)
 	return new_str;
 }
 
+
+ssize_t my_getline(char* str, size_t streamsize, char separator)
+{
+	char symbol = '\0';
+	size_t char_number = 0; 
+	while (((symbol = getchar()) != separator) && (symbol != '\0') && (char_number < streamsize))
+	{
+		str[char_number] = symbol;
+		char_number++;
+	}
+
+	if (char_number < streamsize) // если завершающий символ - разделитель, то количество считанных символов увеличивается на 1
+	{
+		if (str[char_number] == separator)
+		{
+			char_number++;
+		}
+	}
+
+	return char_number;
+}
+
+
+//При успешном выполнении getline() и getdelim() возвращают количество считанных символов, включая символ разделителя, но не включая завершающий байт null ('\0'). Это значение может использоваться для обработки встроенных байтов null при чтении строки.

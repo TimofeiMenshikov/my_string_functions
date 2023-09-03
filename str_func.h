@@ -8,3 +8,4 @@ char* my_strncat(char* dest, const char* append, size_t add_number);
 char* my_fgets(char* str, int number_of_chars, FILE* stream);
 void string_research(const char* const string);
 char* my_strdup(const char* str);
+ssize_t my_getline(char* str, size_t streamsize, char separator);
