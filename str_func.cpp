@@ -2,6 +2,7 @@
 #include <malloc.h>
 #include <assert.h>
 
+#include "str_func.h"
 
 char my_puts(const char* const str)
 {
@@ -21,15 +22,15 @@ char my_puts(const char* const str)
 }
 
 
-char* my_strch(char* const str, const int ch)
+char* my_strch(char* const str, const int ch) 
 {
-	size_t char_number = 1;
+	size_t char_number = 0;
 
 	while (str[char_number] != '\0')
 	{
 		if ((int) str[char_number] == ch)
 		{
-			return str + char_number;
+			return str + char_number + 1;
 		}
 		char_number++;
 	}
@@ -69,6 +70,7 @@ char* my_strncpy(char* dest, const char* source, size_t cp_number)
 	{
 		dest[char_number] = source[char_number];
 	}
+
 	while (char_number < cp_number)
 	{
 		dest[char_number] = '\0';
@@ -80,17 +82,12 @@ char* my_strncpy(char* dest, const char* source, size_t cp_number)
 
 char* my_strcat(char* dest, const char* append)
 {
-	size_t dest_char_number = 0;
-	while (dest[dest_char_number] != '\0')
-	{
+	size_t dest_char_number = my_strlen(dest);
 
-		dest_char_number++;
-	}
 	size_t app_char_number = 0;
 
 	while (append[app_char_number] != '\0')
 	{
-
 		dest[dest_char_number] = append[app_char_number];
 		app_char_number++;
 		dest_char_number++;
@@ -102,11 +99,8 @@ char* my_strcat(char* dest, const char* append)
 
 char* my_strncat(char* dest, const char* append, size_t add_number)
 {
-	size_t dest_char_number = 0;
-	while (dest[dest_char_number] != '\0')
-	{
-		dest_char_number++;
-	}
+	size_t dest_char_number = my_strlen(dest);
+
 	size_t app_char_number = 0;
 
 	while (append[app_char_number] != '\0' && app_char_number < add_number)
@@ -156,7 +150,7 @@ char* my_strdup(const char* str)
 }
 
 
-ssize_t my_getline(char* str, size_t streamsize, char separator)
+ssize_t my_getline(char* const str, const size_t streamsize, const char separator)
 {
 	char symbol = '\0';
 	size_t char_number = 0; 

@@ -9,6 +9,5 @@ int main()
 
 	ssize_t scanned_number = my_getline(str, 10, '\n');
 
-
 	printf("%s", str);
 }
