@@ -150,26 +150,26 @@ char* my_strdup(const char* str)
 }
 
 
-ssize_t my_getline(char* const str, const size_t streamsize, const char separator)
+ssize_t my_getline(char** lineptr, size_t* linesizeptr, FILE* stream)
 {
-	char symbol = '\0';
-	size_t char_number = 0; 
-	while (((symbol = getchar()) != separator) && (symbol != '\0') && (char_number < streamsize))
-	{
-		str[char_number] = symbol;
-		char_number++;
-	}
+	
+	char* line = (char*) calloc(*linesizeptr, sizeof(char));
+	*lineptr = line;
 
-	if (char_number < streamsize) // если завершающий символ - разделитель, то количество считанных символов увеличивается на 1
+	ssize_t char_number = 0;
+	char symbol = '\0';
+	while  (((symbol = fgetc(stream)) != EOF) && (symbol != '\n')) 
 	{
-		if (str[char_number] == separator)
+		line[char_number] = symbol;
+		char_number++;
+		if (char_number >= *linesizeptr)
 		{
-			char_number++;
+			line = (char*) realloc(line, *linesizeptr * 2);
+			*lineptr = line;
 		}
 	}
-
-	return char_number;
+	line[char_number] = '\0';
+	return (ssize_t) char_number;
 }
-
 
 //При успешном выполнении getline() и getdelim() возвращают количество считанных символов, включая символ разделителя, но не включая завершающий байт null ('\0'). Это значение может использоваться для обработки встроенных байтов null при чтении строки.
